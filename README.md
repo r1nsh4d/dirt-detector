@@ -59,3 +59,49 @@ uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
 ### Option 2: Docker
 docker build -t dirt-detector .
 docker run -p 8000:8000 dirt-detector
+
+
+📡 API Endpoints
+
+🩺 Health Check
+http
+
+GET /
+GET /health
+
+
+📤 Dirt Detection
+http
+
+POST /detect-dirt
+Content-Type: multipart/form-data
+Body: image file
+
+
+Returns:
+{
+  "is_clean": false,
+  "confidence": 0.82,
+  "dirt_percentage": 8.3,
+  "processing_time": 0.21
+}
+
+
+🔁 Batch Detection
+http
+
+POST /batch-detect
+Content-Type: multipart/form-data
+Body: multiple image files
+
+
+🧪 Example Usage (cURL)
+curl -X POST http://localhost:8000/detect-dirt \
+  -F "file=@sample.jpg"
+
+
+📘 Documentation
+Access the Swagger UI at:
+
+http
+http://localhost:8000/docs
